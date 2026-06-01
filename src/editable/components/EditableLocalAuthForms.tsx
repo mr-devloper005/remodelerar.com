@@ -30,8 +30,8 @@ const saveSession = (user: Pick<LocalUser, 'name' | 'email'>) => {
   window.dispatchEvent(new Event('slot4-auth-change'))
 }
 
-const inputClass = 'h-12 rounded-2xl border border-[var(--editable-border)] bg-white/85 px-4 text-base font-bold text-current outline-none transition placeholder:text-current/35 focus:border-current focus:bg-white'
-const buttonClass = 'inline-flex h-12 items-center justify-center rounded-2xl bg-current px-6 text-sm font-black uppercase tracking-[0.22em] text-white transition hover:-translate-y-0.5 disabled:opacity-60'
+const inputClass = 'h-12 rounded-2xl border border-[var(--editable-border)] bg-white px-4 text-base font-bold text-[#122033] outline-none transition placeholder:text-[#5f6b7a] focus:border-[#f05a24] focus:bg-white'
+const buttonClass = 'inline-flex h-12 items-center justify-center rounded-2xl bg-[#f05a24] px-6 text-sm font-black uppercase tracking-[0.22em] text-white shadow-[0_14px_30px_rgba(240,90,36,0.32)] transition hover:-translate-y-0.5 hover:bg-[#d94a16] disabled:opacity-60'
 
 export function EditableLocalLoginForm() {
   const router = useRouter()
@@ -79,12 +79,12 @@ export function EditableLocalSignupForm() {
     const normalizedEmail = email.trim().toLowerCase()
     if (password.length < 4) {
       setStatus('error')
-      setMessage('Use at least 4 characters for local demo password.')
+      setMessage('Use at least 4 characters for your remodelerar.com password.')
       return
     }
     const users = readUsers()
     const nextUser: LocalUser = {
-      name: normalizedName || normalizedEmail.split('@')[0] || 'Local User',
+      name: normalizedName || normalizedEmail.split('@')[0] || 'Remodelerar Member',
       email: normalizedEmail,
       password,
       createdAt: new Date().toISOString(),

@@ -3,45 +3,49 @@ import { slot4BrandConfig } from '@/editable/theme/brand.config'
 export const globalContent = {
   site: {
     name: slot4BrandConfig.siteName,
-    tagline: slot4BrandConfig.tagline || 'Independent reading platform',
+    tagline: slot4BrandConfig.tagline,
     domain: slot4BrandConfig.domain,
     baseUrl: slot4BrandConfig.baseUrl,
   },
   nav: {
-    tagline: 'Independent reading platform',
+    tagline: 'Remodeling classifieds marketplace',
     primaryLinks: [
-      { label: 'Articles', href: '/articles' },
-      { label: 'Visuals', href: '/image-sharing' },
-      { label: 'Listings', href: '/listings' },
+      { label: 'Home', href: '/' },
+      { label: 'Classified', href: '/classified' },
+      { label: 'About', href: '/about' },
       { label: 'Contact', href: '/contact' },
     ],
     actions: {
-      primary: { label: 'Start exploring', href: '/' },
-      secondary: { label: 'Submit', href: '/contact' },
+      primary: { label: 'Post a listing', href: '/classified' },
+      secondary: { label: 'Sign up', href: '/signup' },
     },
   },
   footer: {
-    tagline: 'Stories, resources, and discoverable posts',
-    description: 'A connected publishing surface for articles, visuals, listings, profiles, bookmarks, and downloadable resources.',
+    tagline: 'Remodeling projects, contractors, materials, and home services',
+    description: 'Browse remodeling classifieds, contractor profiles, home repair services, renovation materials, and planning resources on remodelerar.com.',
     columns: [
       {
-        title: 'Explore',
+        title: 'Navigation',
         links: [
-          { label: 'Articles', href: '/articles' },
-          { label: 'Listings', href: '/listings' },
-          { label: 'Images', href: '/image-sharing' },
-          { label: 'PDF Library', href: '/pdf' },
+          { label: 'Home', href: '/' },
+          { label: 'Classified', href: '/classified' },
+          { label: 'About', href: '/about' },
+          { label: 'Contact', href: '/contact' },
+          { label: 'Sign up', href: '/signup' },
+          { label: 'Sign in', href: '/login' },
         ],
       },
       {
-        title: 'Site',
+        title: 'Remodeling categories',
         links: [
-          { label: 'About', href: '/about' },
-          { label: 'Contact', href: '/contact' },
+          { label: 'Kitchen remodels', href: '/classified' },
+          { label: 'Bathroom upgrades', href: '/classified' },
+          { label: 'Contractor services', href: '/listing' },
+          { label: 'Project documents', href: '/pdf' },
         ],
       },
     ],
-    bottomNote: 'Built for clean discovery and connected publishing.',
+    bottomNote: 'Built for remodeling classifieds and home improvement discovery.',
   },
   commonLabels: {
     readMore: 'Read more',
