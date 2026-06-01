@@ -5,7 +5,7 @@ import { EditableSiteShell } from '@/editable/shell/EditableSiteShell'
 import { EditableLocalSignupForm } from '@/editable/components/EditableLocalAuthForms'
 
 export async function generateMetadata(): Promise<Metadata> {
-  return buildPageMetadata({ path: '/signup', title: 'Sign up', description: 'Local signup page for this public site.' })
+  return buildPageMetadata({ path: '/signup', title: 'Create a remodelerar.com account', description: 'Create an account to post and manage remodeling classifieds on remodelerar.com.' })
 }
 
 export default function SignupPage() {
@@ -19,9 +19,9 @@ export default function SignupPage() {
             <p className="mt-5 text-sm text-white/65">Already have an account? <Link href="/login" className="font-black text-white underline-offset-4 hover:underline">Login</Link></p>
           </div>
           <div>
-            <p className="text-xs font-black uppercase tracking-[0.28em] text-white/60">Site access</p>
-            <h2 className="mt-5 max-w-xl text-5xl font-black leading-[0.98] tracking-[-0.07em] sm:text-6xl">A bolder entry point for modern content sites.</h2>
-            <p className="mt-6 max-w-lg text-sm leading-8 text-white/68">This sign up screen is presentational and safe for public templates. It gives the navbar real destinations while staying browser-local for testing.</p>
+            <p className="text-xs font-black uppercase tracking-[0.28em] text-white/60">Post on remodelerar.com</p>
+            <h2 className="mt-5 max-w-xl text-5xl font-black leading-[0.98] tracking-[-0.07em] sm:text-6xl">Create an account for remodeling classifieds.</h2>
+            <p className="mt-6 max-w-lg text-sm leading-8 text-white/68">Use remodelerar.com to publish contractor services, project requests, material offers, home repair listings, and renovation resources.</p>
           </div>
         </section>
       </main>
