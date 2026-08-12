@@ -1,6 +1,6 @@
 'use client'
 
-import { Building2, FileText, Mail, MapPin, Phone } from 'lucide-react'
+import { Building2, FileText, MapPin, Phone } from 'lucide-react'
 import { pagesContent } from '@/editable/content/pages.content'
 import { EditableContactLeadForm } from '@/editable/components/EditableContactLeadForm'
 import { EditableSiteShell } from '@/editable/shell/EditableSiteShell'
@@ -14,29 +14,34 @@ const lanes = [
 export default function ContactPage() {
   return (
     <EditableSiteShell>
-      <main className="bg-white px-4 py-10 text-[#111827] lg:px-0">
-        <section className="mx-auto grid max-w-[1120px] gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+      <main className="bg-[#0c1023] text-white">
+        <section className="relative border-b border-white/[0.06] py-20">
+          <div className="absolute inset-0 bg-gradient-to-b from-[#141831] to-transparent opacity-50" />
+          <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
+            <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#d4862a]">{pagesContent.contact.eyebrow}</p>
+            <h1 className="mt-4 max-w-2xl text-4xl font-black uppercase leading-[0.9] tracking-tight sm:text-5xl">{pagesContent.contact.title}</h1>
+            <p className="mt-6 max-w-xl text-base leading-8 text-white/50">{pagesContent.contact.description}</p>
+          </div>
+        </section>
+
+        <section className="mx-auto grid max-w-[1280px] gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
           <div>
-            <p className="text-xs font-bold uppercase tracking-wide text-[#00796b]">{pagesContent.contact.eyebrow}</p>
-            <h1 className="mt-4 text-3xl font-bold leading-tight sm:text-4xl">{pagesContent.contact.title}</h1>
-            <p className="mt-5 max-w-2xl leading-8 text-[#667085]">{pagesContent.contact.description}</p>
-            <div className="mt-8 space-y-4">
+            <div className="space-y-4">
               {lanes.map((lane) => (
-                <div key={lane.title} className="rounded-md border border-[#dfe3e6] bg-[#f8fbfb] p-5">
-                  <lane.icon className="h-5 w-5 text-[#00796b]" />
-                  <h2 className="mt-3 text-xl font-bold">{lane.title}</h2>
-                  <p className="mt-2 text-sm leading-7 text-[#667085]">{lane.body}</p>
+                <div key={lane.title} className="border border-white/[0.06] bg-[#141831] p-6">
+                  <lane.icon className="h-5 w-5 text-[#d4862a]" />
+                  <h2 className="mt-4 text-xl font-black uppercase tracking-tight">{lane.title}</h2>
+                  <p className="mt-3 text-sm leading-7 text-white/40">{lane.body}</p>
                 </div>
               ))}
             </div>
-            <div className="mt-6 grid gap-3 text-sm text-[#4b5563]">
-              <p className="flex gap-2"><MapPin className="h-4 w-4 text-[#00796b]" /> Serving remodeling projects, home service requests, and contractor listings through remodelerar.com.</p>
-              
+            <div className="mt-6 text-sm text-white/30">
+              <p className="flex gap-2"><MapPin className="h-4 w-4 shrink-0 text-[#d4862a]" /> Serving remodeling projects, home service requests, and contractor listings.</p>
             </div>
           </div>
 
-          <div className="rounded-md border border-[#dfe3e6] bg-[#f7f7f7] p-5">
-            <h2 className="text-2xl font-bold">{pagesContent.contact.formTitle}</h2>
+          <div className="border border-white/[0.06] bg-[#141831] p-6">
+            <h2 className="text-2xl font-black uppercase tracking-tight">{pagesContent.contact.formTitle}</h2>
             <EditableContactLeadForm />
           </div>
         </section>
