@@ -7,8 +7,8 @@ export const slot4BrandConfig = {
   logoAlt: 'remodelerar',
   productKind: 'directory',
   accents: {
-    primary: '#00796b',
-    secondary: '#3156d4',
-    warm: '#f28c2a',
+    primary: '#3d3dba',
+    secondary: '#d4862a',
+    warm: '#d4862a',
   },
 } as const
