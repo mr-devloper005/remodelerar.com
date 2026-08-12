@@ -39,13 +39,13 @@ function pageHref(basePath: string, category: string, page: number) {
 }
 
 const taskDeck: Record<TaskKey, { icon: typeof FileText; archiveClass: string; badge: string }> = {
-  article: { icon: FileText, archiveClass: 'grid gap-5 md:grid-cols-2 lg:grid-cols-3', badge: 'Guides' },
-  listing: { icon: Building2, archiveClass: 'grid gap-4 sm:grid-cols-2 lg:grid-cols-5', badge: 'Companies' },
-  classified: { icon: Megaphone, archiveClass: 'grid gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5', badge: 'Ads' },
-  image: { icon: Camera, archiveClass: 'columns-1 gap-5 space-y-5 md:columns-2 lg:columns-3', badge: 'Project images' },
-  sbm: { icon: Bookmark, archiveClass: 'grid gap-4 md:grid-cols-2 lg:grid-cols-3', badge: 'Bookmarks' },
-  pdf: { icon: Download, archiveClass: 'grid gap-5 md:grid-cols-2 lg:grid-cols-3', badge: 'PDF' },
-  profile: { icon: UserRound, archiveClass: 'grid gap-4 sm:grid-cols-2 lg:grid-cols-5', badge: 'Providers' },
+  article: { icon: FileText, archiveClass: 'grid gap-6 md:grid-cols-2 lg:grid-cols-3', badge: 'Guides' },
+  listing: { icon: Building2, archiveClass: 'grid gap-6 sm:grid-cols-2 lg:grid-cols-4', badge: 'Companies' },
+  classified: { icon: Megaphone, archiveClass: 'grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4', badge: 'Ads' },
+  image: { icon: Camera, archiveClass: 'columns-1 gap-6 space-y-6 md:columns-2 lg:columns-3', badge: 'Project images' },
+  sbm: { icon: Bookmark, archiveClass: 'grid gap-6 md:grid-cols-2 lg:grid-cols-3', badge: 'Bookmarks' },
+  pdf: { icon: Download, archiveClass: 'grid gap-6 md:grid-cols-2 lg:grid-cols-3', badge: 'PDF' },
+  profile: { icon: UserRound, archiveClass: 'grid gap-6 sm:grid-cols-2 lg:grid-cols-4', badge: 'Providers' },
 }
 
 export async function EditableTaskArchiveRoute({
@@ -77,53 +77,59 @@ export function TaskArchiveView({ task, posts, pagination, category, basePath }:
 
   return (
     <EditableSiteShell>
-      <main className="bg-white text-[#111827]">
-        <section className="mx-auto max-w-[1120px] px-4 py-8 lg:px-0">
-          <form action="/search" className="mb-10 flex h-[58px] max-w-[655px] items-center rounded border border-[#cfd8dc] bg-white px-5">
-            <Search className="h-6 w-6 text-[#3d454c]" />
-            <span className="ml-5 text-[10px] font-bold uppercase text-[#4d555c]">Enhanced by</span>
-            <span className="ml-2 text-sm font-bold text-[#68717a]">Google</span>
-            <input name="q" className="min-w-0 flex-1 bg-transparent px-3 outline-none" aria-label="Search" />
-          </form>
+      <main className="bg-[#0c1023] text-white">
+        <section className="relative overflow-hidden border-b border-white/[0.06] bg-[#0c1023] py-20">
+          <div className="absolute inset-0 bg-gradient-to-b from-[#141831] to-transparent opacity-50" />
+          <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6 lg:px-8">
+            <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px] lg:items-end">
+              <div>
+                <p className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.25em] text-[#d4862a]"><Icon className="h-4 w-4" /> {deck.badge}</p>
+                <h1 className="mt-4 text-5xl font-black uppercase leading-[0.9] tracking-tight text-white sm:text-7xl">{voice?.headline || `Browse ${label}`}</h1>
+                <p className="mt-6 max-w-2xl text-base leading-8 text-white/50">{voice?.description || SITE_CONFIG.description}</p>
+              </div>
 
-          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_280px] lg:items-end">
-            <div>
-              <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-[#00796b]"><Icon className="h-4 w-4" /> {deck.badge}</p>
-              <h1 className="mt-3 bg-[linear-gradient(90deg,#3156d4,#8429ce,#ef3f57)] bg-clip-text text-3xl font-bold text-transparent sm:text-4xl">{voice?.headline || `Browse ${label}`}</h1>
-              <p className="mt-4 max-w-3xl leading-8 text-[#667085]">{voice?.description || SITE_CONFIG.description}</p>
+              <form action={basePath} className="border border-white/[0.06] bg-[#141831] p-5">
+                <div className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-white/40"><Filter className="h-4 w-4" /> Filter listings</div>
+                <select name="category" defaultValue={category} className="mt-4 h-11 w-full border border-white/[0.06] bg-[#0f1329] px-4 text-sm text-white outline-none">
+                  <option value="all">All categories</option>
+                  {CATEGORY_OPTIONS.map((item) => <option key={item.slug} value={item.slug}>{item.name}</option>)}
+                </select>
+                <button className="mt-4 h-11 w-full bg-[#3d3dba] text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:brightness-110">Apply</button>
+                <p className="mt-3 text-xs text-white/30">Showing: {categoryLabel}</p>
+              </form>
             </div>
 
-            <form action={basePath} className="rounded border border-[#dfe3e6] bg-[#f7f7f7] p-4">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase text-[#667085]"><Filter className="h-4 w-4" /> Filter listings</div>
-              <select name="category" defaultValue={category} className="mt-3 h-11 w-full rounded border border-[#dfe3e6] bg-white px-3 text-sm outline-none">
-                <option value="all">All categories</option>
-                {CATEGORY_OPTIONS.map((item) => <option key={item.slug} value={item.slug}>{item.name}</option>)}
-              </select>
-              <button className="mt-3 h-10 w-full rounded bg-[#00796b] text-sm font-bold text-white">Apply</button>
-              <p className="mt-3 text-xs text-[#667085]">Showing: {categoryLabel}</p>
+            <form action="/search" className="mt-10 flex h-[52px] max-w-[600px] items-center border border-white/[0.06] bg-[#141831] px-5">
+              <Search className="h-5 w-5 text-white/30" />
+              <input name="q" placeholder="Search listings..." className="min-w-0 flex-1 bg-transparent px-4 text-sm text-white outline-none placeholder:text-white/25" aria-label="Search" />
+              <button className="bg-[#3d3dba] px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-white">Search</button>
             </form>
           </div>
-
-          {featured ? <div className="mt-8"><EditorialFeatureCard post={featured} href={`${basePath}/${featured.slug}`} label="Featured" /></div> : null}
         </section>
 
-        <section className="mx-auto max-w-[1120px] px-4 pb-14 lg:px-0">
+        {featured ? (
+          <section className="mx-auto max-w-[1280px] px-4 py-10 sm:px-6 lg:px-8">
+            <EditorialFeatureCard post={featured} href={`${basePath}/${featured.slug}`} label="Featured" />
+          </section>
+        ) : null}
+
+        <section className="mx-auto max-w-[1280px] px-4 pb-20 sm:px-6 lg:px-8">
           {posts.length ? (
             <div className={deck.archiveClass}>
               {posts.map((post, index) => <ArchivePostCard key={post.id || post.slug} post={post} task={task} basePath={basePath} index={index} />)}
             </div>
           ) : (
-            <div className="rounded border border-dashed border-[#b9c3c8] bg-white p-10 text-center">
-              <Search className="mx-auto h-8 w-8 text-[#9aa2a9]" />
-              <h2 className="mt-4 text-2xl font-bold">No posts found</h2>
-              <p className="mt-2 text-sm text-[#667085]">Try another category or return after new posts are published.</p>
+            <div className="border border-dashed border-white/10 bg-[#141831] p-14 text-center">
+              <Search className="mx-auto h-8 w-8 text-white/20" />
+              <h2 className="mt-5 text-2xl font-black uppercase text-white">No posts found</h2>
+              <p className="mt-3 text-sm text-white/40">Try another category or return after new posts are published.</p>
             </div>
           )}
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            {pagination.hasPrevPage ? <Link href={pageHref(basePath, category, page - 1)} className="rounded border border-[#b8bec4] bg-white px-4 py-2 text-sm font-bold">Previous</Link> : null}
-            <span className="rounded bg-[#00796b] px-4 py-2 text-sm font-bold text-white">Page {page} of {pagination.totalPages || 1}</span>
-            {pagination.hasNextPage ? <Link href={pageHref(basePath, category, page + 1)} className="rounded border border-[#b8bec4] bg-white px-4 py-2 text-sm font-bold">Next</Link> : null}
+          <div className="mt-14 flex flex-wrap items-center justify-center gap-4">
+            {pagination.hasPrevPage ? <Link href={pageHref(basePath, category, page - 1)} className="border border-white/[0.06] bg-[#141831] px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-white/[0.06]">Previous</Link> : null}
+            <span className="bg-[#3d3dba] px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white">Page {page} of {pagination.totalPages || 1}</span>
+            {pagination.hasNextPage ? <Link href={pageHref(basePath, category, page + 1)} className="border border-white/[0.06] bg-[#141831] px-6 py-3 text-sm font-bold uppercase tracking-[0.12em] text-white transition hover:bg-white/[0.06]">Next</Link> : null}
           </div>
         </section>
       </main>
@@ -146,15 +152,15 @@ function ArchivePostCard({ post, task, basePath, index }: { post: SitePost; task
 function SellerCard({ post, href, profile = false }: { post: SitePost; href: string; profile?: boolean }) {
   const location = getField(post, ['location', 'address', 'city']) || 'Local remodeling service area'
   return (
-    <Link href={href} className="overflow-hidden rounded-md border border-[#dfe3e6] bg-white text-center shadow-sm transition hover:-translate-y-0.5">
-      <div className="h-36 bg-[#004638] p-2"><img src={getEditablePostImage(post)} alt={post.title || ''} className="h-full w-full rounded object-cover" /></div>
-      <div className="-mt-8 px-4 pb-5">
-        <div className="mx-auto flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border-4 border-white bg-[#f5f5f5]">
-          {profile ? <UserRound className="h-8 w-8 text-[#667085]" /> : <img src={getEditablePostImage(post)} alt="" className="h-full w-full object-cover" />}
+    <Link href={href} className="group block overflow-hidden border border-white/[0.06] bg-[#141831] text-center transition hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
+      <div className="h-36 bg-[#1a2040] p-2"><img src={getEditablePostImage(post)} alt={post.title || ''} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" /></div>
+      <div className="-mt-8 px-4 pb-6">
+        <div className="mx-auto flex h-16 w-16 items-center justify-center overflow-hidden border-4 border-[#141831] bg-[#0f1329]">
+          {profile ? <UserRound className="h-8 w-8 text-white/30" /> : <img src={getEditablePostImage(post)} alt="" className="h-full w-full object-cover" />}
         </div>
-        <h2 className="mt-3 line-clamp-1 font-bold">{post.title || 'Remodeling provider listing'}</h2>
-        <p className="mt-2 text-sm text-[#7a828b]">{location}</p>
-        <span className="mt-3 inline-block rounded bg-[#f0b82f] px-2 py-1 text-xs font-bold text-white">Verified listing</span>
+        <h2 className="mt-3 line-clamp-1 font-black text-white">{post.title || 'Remodeling provider listing'}</h2>
+        <p className="mt-2 text-sm text-white/40">{location}</p>
+        <span className="mt-3 inline-block bg-[#d4862a] px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-white">Verified</span>
       </div>
     </Link>
   )
@@ -163,22 +169,27 @@ function SellerCard({ post, href, profile = false }: { post: SitePost; href: str
 function ClassifiedGridCard({ post, href, index }: { post: SitePost; href: string; index: number }) {
   const price = getField(post, ['price', 'amount', 'budget']) || (index % 3 === 0 ? 'Request quote' : 'Contact provider')
   return (
-    <Link href={href} className="group block">
-      <img src={getEditablePostImage(post)} alt={post.title || ''} className="aspect-square w-full rounded object-cover transition group-hover:opacity-85" />
-      <h2 className="mt-3 line-clamp-1 text-lg font-bold">{price}</h2>
-      <p className="line-clamp-1 text-sm text-[#4b5563]">{post.title || 'Remodeling service listing'}</p>
-      <p className="mt-1 text-xs text-[#7a828b]">{index + 1} months - Remodel - Service - {getEditableCategory(post)}</p>
+    <Link href={href} className="group block transition hover:-translate-y-1">
+      <div className="relative overflow-hidden bg-[#141831]">
+        <img src={getEditablePostImage(post)} alt={post.title || ''} className="aspect-square w-full object-cover transition duration-500 group-hover:scale-105" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+      </div>
+      <div className="mt-3">
+        <h2 className="line-clamp-1 text-lg font-black text-white">{price}</h2>
+        <p className="line-clamp-1 text-sm text-white/50">{post.title || 'Remodeling service listing'}</p>
+        <p className="mt-1 text-xs text-white/25">{getEditableCategory(post)}</p>
+      </div>
     </Link>
   )
 }
 
 function ImageArchiveCard({ post, href, index }: { post: SitePost; href: string; index: number }) {
   return (
-    <Link href={href} className="mb-5 block break-inside-avoid overflow-hidden rounded-md border border-[#dfe3e6] bg-white shadow-sm transition hover:-translate-y-0.5">
+    <Link href={href} className="mb-6 block break-inside-avoid overflow-hidden border border-white/[0.06] bg-[#141831] transition hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
       <img src={getEditablePostImage(post)} alt={post.title || ''} className={`w-full object-cover ${index % 3 === 0 ? 'aspect-[3/4]' : 'aspect-[4/3]'}`} />
-      <div className="p-4">
-        <p className="inline-flex items-center gap-2 text-xs font-bold uppercase text-[#00796b]"><ImageIcon className="h-3 w-3" /> Visual</p>
-        <h2 className="mt-2 line-clamp-2 text-lg font-bold">{post.title || 'Remodeling project image'}</h2>
+      <div className="p-5">
+        <p className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-[#d4862a]"><ImageIcon className="h-3 w-3" /> Visual</p>
+        <h2 className="mt-2 line-clamp-2 text-lg font-black text-white">{post.title || 'Remodeling project image'}</h2>
       </div>
     </Link>
   )
@@ -186,11 +197,11 @@ function ImageArchiveCard({ post, href, index }: { post: SitePost; href: string;
 
 function DocumentCard({ post, href }: { post: SitePost; href: string }) {
   return (
-    <Link href={href} className="rounded-md border border-[#dfe3e6] bg-white p-5 shadow-sm transition hover:-translate-y-0.5">
-      <div className="flex h-14 w-14 items-center justify-center rounded bg-[#004638] text-white"><FileText className="h-7 w-7" /></div>
-      <h2 className="mt-5 line-clamp-2 text-xl font-bold">{post.title || 'Remodeling project document'}</h2>
-      <p className="mt-3 line-clamp-3 text-sm leading-6 text-[#667085]">{getEditableExcerpt(post, 150)}</p>
-      <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-[#00796b]">Open remodeling document <ArrowRight className="h-4 w-4" /></span>
+    <Link href={href} className="border border-white/[0.06] bg-[#141831] p-6 transition hover:-translate-y-1 hover:shadow-[0_8px_30px_rgba(0,0,0,0.4)]">
+      <div className="flex h-14 w-14 items-center justify-center bg-[#3d3dba] text-white"><FileText className="h-7 w-7" /></div>
+      <h2 className="mt-5 line-clamp-2 text-xl font-black text-white">{post.title || 'Remodeling project document'}</h2>
+      <p className="mt-3 line-clamp-3 text-sm leading-6 text-white/40">{getEditableExcerpt(post, 150)}</p>
+      <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#d4862a]">Open document <ArrowRight className="h-4 w-4" /></span>
     </Link>
   )
 }

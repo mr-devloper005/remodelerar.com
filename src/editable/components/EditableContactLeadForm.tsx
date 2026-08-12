@@ -34,27 +34,27 @@ export function EditableContactLeadForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-5 rounded-md border border-[#dfe3e6] bg-white p-5 shadow-sm">
+    <form onSubmit={handleSubmit} className="mt-6">
       <div className="grid gap-4 md:grid-cols-2">
         <Field name="name" label="Full name" placeholder="Your name" required />
         <Field name="email" type="email" label="Email address" placeholder="you@example.com" required />
       </div>
       <div className="mt-4 grid gap-4 md:grid-cols-2">
         <Field name="phone" label="Phone number" placeholder="Optional" />
-        <Field name="subject" label="Subject" placeholder="Kitchen remodel, contractor listing, materials, or support" />
+        <Field name="subject" label="Subject" placeholder="Kitchen remodel, contractor, materials..." />
       </div>
-      <label className="mt-4 grid gap-2 text-sm font-bold text-[#2b3440]">
+      <label className="mt-4 grid gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-white/50">
         Message
-        <textarea name="message" required rows={6} placeholder="Tell us about the remodeling project, listing, service, or material offer..." className="rounded-md border border-[#dfe3e6] bg-white px-4 py-3 text-base outline-none transition focus:border-[#00796b]" />
+        <textarea name="message" required rows={6} placeholder="Tell us about your project, listing, or service..." className="border border-white/[0.06] bg-[#0f1329] px-4 py-3 text-sm font-medium text-white outline-none transition placeholder:text-white/20 focus:border-[#3d3dba]" />
       </label>
       <input name="company" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
       {message ? (
-        <div className={`mt-5 flex items-start gap-3 rounded-md px-4 py-3 text-sm font-bold ${status === 'success' ? 'bg-emerald-50 text-emerald-800' : 'bg-red-50 text-red-700'}`}>
+        <div className={`mt-5 flex items-start gap-3 px-4 py-3 text-sm font-bold ${status === 'success' ? 'bg-emerald-900/30 text-emerald-300' : 'bg-red-900/30 text-red-300'}`}>
           {status === 'success' ? <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" /> : null}
           <span>{message}</span>
         </div>
       ) : null}
-      <button type="submit" disabled={status === 'submitting'} className="mt-6 inline-flex h-11 w-full items-center justify-center gap-2 rounded-md bg-[#00796b] px-6 text-sm font-bold text-white transition hover:brightness-95 disabled:cursor-not-allowed disabled:opacity-70">
+      <button type="submit" disabled={status === 'submitting'} className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 bg-[#3d3dba] text-sm font-bold uppercase tracking-[0.15em] text-white transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70">
         {status === 'submitting' ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
         Send message
       </button>
@@ -64,9 +64,9 @@ export function EditableContactLeadForm() {
 
 function Field({ name, label, type = 'text', placeholder, required = false }: { name: string; label: string; type?: string; placeholder?: string; required?: boolean }) {
   return (
-    <label className="grid gap-2 text-sm font-bold text-[#2b3440]">
+    <label className="grid gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-white/50">
       {label}
-      <input name={name} type={type} required={required} placeholder={placeholder} className="h-11 rounded-md border border-[#dfe3e6] bg-white px-4 text-base outline-none transition focus:border-[#00796b]" />
+      <input name={name} type={type} required={required} placeholder={placeholder} className="h-11 border border-white/[0.06] bg-[#0f1329] px-4 text-sm font-medium text-white outline-none transition placeholder:text-white/20 focus:border-[#3d3dba]" />
     </label>
   )
 }
